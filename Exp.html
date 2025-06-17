@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSight - Pro Expense Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="logo">
+                    <h2>FinSight</h2>
+                    <span>Pro Expense Intelligence</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="user-greeting" id="userGreeting">Good Morning!</div>
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active" data-section="dashboard">
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="#" class="menu-item" data-section="transactions">
+                    <span class="menu-icon">💳</span>
+                    <span class="menu-text">Transactions</span>
+                </a>
+                <a href="#" class="menu-item" data-section="budget">
+                    <span class="menu-icon">🎯</span>
+                    <span class="menu-text">Budget</span>
+                </a>
+                <a href="#" class="menu-item" data-section="analytics">
+                    <span class="menu-icon">📈</span>
+                    <span class="menu-text">Analytics</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Dashboard Section -->
+        <section class="content-section active" id="dashboard">
+            <div class="section-header">
+                <h1>Dashboard</h1>
+                <button class="btn btn-primary" id="addTransactionBtn">
+                    <span>+</span> Add Transaction
+                </button>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-grid">
+                <div class="summary-card balance-card">
+                    <div class="card-icon">💰</div>
+                    <div class="card-content">
+                        <h3>Total Balance</h3>
+                        <div class="amount" id="totalBalance">$0.00</div>
+                    </div>
+                </div>
+                <div class="summary-card income-card">
+                    <div class="card-icon">📈</div>
+                    <div class="card-content">
+                        <h3>Total Income</h3>
+                        <div class="amount income" id="totalIncome">$0.00</div>
+                    </div>
+                </div>
+                <div class="summary-card expense-card">
+                    <div class="card-icon">📉</div>
+                    <div class="card-content">
+                        <h3>Total Expenses</h3>
+                        <div class="amount expense" id="totalExpenses">$0.00</div>
+                    </div>
+                </div>
+                <div class="summary-card budget-card">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-content">
+                        <h3>Budget Status</h3>
+                        <div class="budget-progress">
+                            <div class="progress-circle" id="budgetProgress">
+                                <span id="budgetPercentage">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="dashboard-section">
+                <div class="section-title">
+                    <h2>Recent Transactions</h2>
+                    <a href="#" class="view-all" data-section="transactions">View All</a>
+                </div>
+                <div class="recent-transactions" id="recentTransactions">
+                    <!-- Recent transactions will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Transactions Section -->
+        <section class="content-section" id="transactions">
+            <div class="section-header">
+                <h1>Transactions</h1>
+                <button class="btn btn-primary" id="addTransactionBtn2">
+                    <span>+</span> Add Transaction
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-container">
+                <div class="filter-group">
+                    <input type="text" class="filter-input" id="searchInput" placeholder="Search transactions...">
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                    <select class="filter-select" id="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                    <input type="date" class="filter-input" id="dateFromFilter">
+                    <input type="date" class="filter-input" id="dateToFilter">
+                    <button class="btn btn-secondary" id="clearFilters">Clear</button>
+                </div>
+            </div>
+
+            <!-- Transactions List -->
+            <div class="transactions-container">
+                <div class="transactions-list" id="transactionsList">
+                    <!-- Transactions will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget Section -->
+        <section class="content-section" id="budget">
+            <div class="section-header">
+                <h1>Budget Management</h1>
+            </div>
+
+            <div class="budget-container">
+                <div class="budget-card">
+                    <h3>Monthly Budget Limit</h3>
+                    <div class="budget-input-group">
+                        <input type="number" id="budgetLimit" placeholder="Enter budget limit" min="0" step="0.01">
+                        <button class="btn btn-primary" id="setBudgetBtn">Set Budget</button>
+                    </div>
+                    <div class="budget-status" id="budgetStatus">
+                        <div class="budget-bar">
+                            <div class="budget-fill" id="budgetFill"></div>
+                        </div>
+                        <div class="budget-info">
+                            <span id="budgetSpent">$0</span> / <span id="budgetTotal">$0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section class="content-section" id="analytics">
+            <div class="section-header">
+                <h1>Analytics</h1>
+                <div class="export-buttons">
+                    <button class="btn btn-secondary" id="exportCSV">Export CSV</button>
+                    <button class="btn btn-secondary" id="printReport">Print Report</button>
+                </div>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="chart-container">
+                    <h3>Expense Categories</h3>
+                    <div class="pie-chart" id="categoryChart">
+                        <!-- Category chart will be generated here -->
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Monthly Trend</h3>
+                    <div class="bar-chart" id="monthlyChart">
+                        <!-- Monthly chart will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Transaction Modal -->
+    <div class="modal-overlay" id="transactionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Transaction</h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <form class="modal-body" id="transactionForm">
+                <div class="form-group">
+                    <label for="transactionTitle">Title *</label>
+                    <input type="text" id="transactionTitle" required>
+                    <span class="error-message" id="titleError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="transactionAmount">Amount *</label>
+                    <input type="number" id="transactionAmount" step="0.01" min="0" required>
+                    <span class="error-message" id="amountError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="transactionType">Type *</label>
+                    <select id="transactionType" required>
+                        <option value="">Select Type</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                    <span class="error-message" id="typeError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="transactionCategory">Category *</label>
+                    <select id="transactionCategory" required>
+                        <option value="">Select Category</option>
+                    </select>
+                    <span class="error-message" id="categoryError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDate">Date *</label>
+                    <input type="date" id="transactionDate" required>
+                    <span class="error-message" id="dateError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="transactionNotes">Notes</label>
+                    <textarea id="transactionNotes" rows="3" placeholder="Optional notes..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveBtn">Save Transaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 FinSight - Pro Expense Intelligence. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
